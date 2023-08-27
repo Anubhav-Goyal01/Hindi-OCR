@@ -2,9 +2,9 @@ import cv2
 from ultralytics import YOLO
 import easyocr
 import numpy as np
-reader=easyocr.Reader(["en","hi"])
 
 
+reader=easyocr.Reader(["hi"])
 model = YOLO("best.pt")
 
 cap = cv2.VideoCapture(0)
@@ -34,7 +34,8 @@ while cap.isOpened():
             cls = int(r.boxes.cls)
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
             cv2.putText(frame, f"{cls} {conf:.2f}", (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-            print("Text:", text[0][1])
+            if text != []:
+                print("Text:", text[0][1])
 
             
 
